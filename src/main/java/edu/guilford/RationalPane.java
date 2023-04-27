@@ -9,18 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-// At least one class definition file that extends a Pane like GridPane, FlowPane, or BorderPane (or even just Pane 
-//if you want complete control over the placement of your interface components). 
 public class RationalPane extends GridPane {
-    // At least four kinds of interface elements, including at least one that was
-    // not demoed in class. Your textbook and other resources on JavaFX can
-    // help you discover a variety of interface elements. At least one
-    // interface element should use
-    // an image. At least one interface element should have the
-    // user enter information.
 
     // Rational attribute
-    // Ask how to get user's rational number
     private Rational rational;
 
     // Three text fields
@@ -101,11 +92,6 @@ public class RationalPane extends GridPane {
         // Button in the bottom of the panel
         this.add(showImage, 0, 4);
 
-        // // Change the image to be of different size
-        // imageView.setFitHeight(100);
-        // // And preserve the aspect ratio (ratio of width to height)
-        // imageView.setPreserveRatio(true);
-
         // Give a pane a border color of black
         this.setStyle("-fx-border-color: black;");
         // Give a pane a background color
@@ -119,9 +105,8 @@ public class RationalPane extends GridPane {
 
         // Image
         // Step 3. Add the ImageView to the bottom half of the pane.
-        // I didn't add it
-        // here but actually
-        // added it in the button listener below.
+        // I didn't add it here but actually
+        // added it in the button listener below. Scroll all the way down to the bottom of the code to view the listener. 
 
         // Add a listener that gets the value inputted into the Numerator and
         // Denominator textfields after user clicks enter
@@ -215,17 +200,24 @@ public class RationalPane extends GridPane {
             resultField.setText(rational.add(randomRational).toString());
         });
 
-        // Add a listener that displays image when button is clicked on
+        // Add a listener that displays or removes image every time button is clicked on 
         // Step 3. Add the ImageView to the bottom half of the pane.
         // Steps 4 & 5: Write an event listener and connect it to the component
-        // that will trigger the event. (open the image when the button is clicked)
+        // that will trigger the event. (open pr close the image everytime the button is clicked)
+        
         showImage.setOnAction(e -> {
             // Position image at the center of bottom half of the pane
-            this.add(imageView, 1, 7);
-            // alter image size
-            imageView.setFitWidth(380);
-            imageView.setFitHeight(380);
-            });
+            if (showImage.getText().equals("Ew,Math!")) {
+                this.add(imageView, 1, 7);
+                // alter image size
+                imageView.setFitWidth(380);
+                imageView.setFitHeight(380);
+                showImage.setText("Hide Image");
+            } else {
+                this.getChildren().remove(imageView);
+                showImage.setText("Ew,Math!");
+            }
+        });
 
     }
 
